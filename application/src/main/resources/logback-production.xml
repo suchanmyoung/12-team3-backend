@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="logback/properties.xml"/>
+
+  <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/production.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/rolling/production.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+
+    <encoder><pattern>${DEFAULT_PATTERN}</pattern></encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="dailyRollingFileAppender"/>
+  </root>
+</configuration>
