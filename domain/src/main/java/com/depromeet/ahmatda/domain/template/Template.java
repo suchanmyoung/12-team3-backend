@@ -58,4 +58,12 @@ public class Template extends BaseTimeEntity {
     public boolean authenticateUser(String userId) {
         return this.user.getUserToken().equals(userId);
     }
+
+    public void modifyTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public void modifyTemplateIsPIn(boolean isPin) {
+        this.isPin = isPin;
+    }
 }

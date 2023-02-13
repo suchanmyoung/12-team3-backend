@@ -1,7 +1,8 @@
 package com.depromeet.ahmatda.domain.category;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
-import com.depromeet.ahmatda.domain.RecommendTemplate;
+import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
 
@@ -31,20 +32,18 @@ public class Category extends BaseTimeEntity {
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Template> templates = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
-    private List<RecommendTemplate> recommendTemplates = new ArrayList<>();
-
     @Column
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private CategoryType type;
 
     @Column
     private String name;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Emoji emoji;
+    private AhmatdaEmoji emoji;
 
-    public boolean authenticateUser(String userId) {
-        return this.user.getUserToken().equals(userId);
+    public boolean authenticateUser(final String userToken) {
+        return this.user.getUserToken().equals(userToken);
     }
 }

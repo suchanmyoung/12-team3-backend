@@ -31,20 +31,30 @@ include::{snippets}/common-error-response/http-response.adoc[]
 == APIs
 
 [[User]]
-=== User - 등록
-
-==== Method : Post
+=== userToken 으로 유저 체크
 ==== curl-request
-include::{snippets}/user-sign-up/curl-request.adoc[]
-==== Request Body
-include::{snippets}/user-sign-up/request-body.adoc[]
-include::{snippets}/user-sign-up/request-fields.adoc[]
+include::{snippets}/check-user-token/curl-request.adoc[]
+==== 요청 필드
+include::{snippets}/check-user-token/request-parameters.adoc[]
 ==== 정상 응답
-include::{snippets}/user-sign-up/response-body.adoc[]
-==== 에러 응답 - 이미 존재하는 유저
-include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
-==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
-include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
+include::{snippets}/check-user-token/response-body.adoc[]
+include::{snippets}/check-user-token/response-fields.adoc[]
+
+=== 온보딩 저장 및 유저 토큰 반환
+==== curl-request
+include::{snippets}/sign-up-onboarding/curl-request.adoc[]
+==== 요청 바디
+include::{snippets}/sign-up-onboarding/request-body.adoc[]
+include::{snippets}/sign-up-onboarding/request-fields.adoc[]
+
+=== FCM TOKEN 갱신
+==== curl-request
+include::{snippets}/fcm-token-update/curl-request.adoc[]
+==== Request Header
+include::{snippets}/fcm-token-update/request-headers.adoc[]
+==== 요청 바디
+include::{snippets}/fcm-token-update/request-body.adoc[]
+include::{snippets}/fcm-token-update/request-fields.adoc[]
 
 [[Category]]
 === Category - 전체 조회
@@ -137,7 +147,7 @@ include::{snippets}/category/http-response.adoc[]
 [[Template]]
 === Template - 유저템플릿 조회
 
-==== Method : Get
+==== Method : GET
 ==== curl-request
 include::{snippets}/template-by-user-category/curl-request.adoc[]
 ==== Request Body
@@ -147,15 +157,152 @@ include::{snippets}/template-by-user-category/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
 include::{snippets}/template-by-user-category/http-response.adoc[]
 
-[[Template]]
 === Template - 유저템플릿 생성
-
-==== Method : Get
+==== Method : GET
 ==== curl-request
 include::{snippets}/create-template/curl-request.adoc[]
 ==== Request Body
+include::{snippets}/create-template/request-fields.adoc[]
 include::{snippets}/create-template/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/create-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
 include::{snippets}/create-template/http-response.adoc[]
+
+=== Template - 유저템플릿 삭제
+==== Method : DELETE
+==== curl-request
+include::{snippets}/delete-template/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/delete-template/response-body.adoc[]
+==== 에러 응답 - 존재하지 않는 유저템플릿
+include::{snippets}/delete-template/http-response.adoc[]
+
+=== Template - 유저템플릿 고정여부 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/modify-template-pin/curl-request.adoc[]
+include::{snippets}/modify-template-pin/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/modify-template-pin/response-body.adoc[]
+
+=== Template - 유저템플릿 이름 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/modify-template-name/curl-request.adoc[]
+include::{snippets}/modify-template-name/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/modify-template-name/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품추가
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-add-item/curl-request.adoc[]
+include::{snippets}/template-add-item/request-fields.adoc[]
+==== Request Body
+include::{snippets}/template-add-item/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-add-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품삭제
+==== Method : DELETE
+==== curl-request
+include::{snippets}/template-delete-item/curl-request.adoc[]
+include::{snippets}/template-delete-item/request-fields.adoc[]
+==== Request Body
+include::{snippets}/template-delete-item/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-delete-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-modfiy-item/curl-request.adoc[]
+include::{snippets}/template-modfiy-item/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-modfiy-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품 챙김 여부 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-modfiy-pin-item/curl-request.adoc[]
+include::{snippets}/template-modfiy-pin-item/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-modfiy-pin-item/response-body.adoc[]
+
+[[RecommendTemplate]]
+
+=== RecommendCategory - 추천소지품 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-items/curl-request.adoc[]
+include::{snippets}/recommend-items/request-parameters.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-items/response-body.adoc[]
+include::{snippets}/recommend-items/response-fields.adoc[]
+
+=== RecommendCategory - 추천카테고리 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-category/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-category/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-templates/curl-request.adoc[]
+include::{snippets}/recommend-templates/request-parameters.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-templates/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 새로운카테고리에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-create-category/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-create-category/response-body.adoc[]
+
+=== RecommendCategory - 추천소지품 유저템플릿에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-add-user-template-add-items/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-add-user-template-add-items/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 유저템플릿에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-create-template/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-create-template/response-body.adoc[]
+
+[[Alarm]]
+
+=== Alarm - 알람 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/get-alarm-by-template-id/curl-request.adoc[]
+include::{snippets}/get-alarm-by-template-id/request-parameters.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/get-alarm-by-template-id/response-body.adoc[]
+include::{snippets}/get-alarm-by-template-id/response-fields-result.adoc[]
+
+=== Alarm 히스토리 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/alarm-history/curl-request.adoc[]
+include::{snippets}/alarm-history/request-headers.adoc[]
+
+==== 정상 응답
+include::{snippets}/alarm-history/response-body.adoc[]
+include::{snippets}/alarm-history/response-fields-result.adoc[]
+
+=== Alarm - 날짜별 알람 생성
+==== Method : GET
+==== curl-request
+include::{snippets}/create-alarm-daily/curl-request.adoc[]
+include::{snippets}/create-alarm-daily/request-body.adoc[]
+include::{snippets}/create-alarm-daily/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/create-alarm-daily/response-body.adoc[]

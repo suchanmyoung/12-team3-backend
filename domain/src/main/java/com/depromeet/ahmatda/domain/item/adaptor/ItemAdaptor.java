@@ -5,6 +5,9 @@ import com.depromeet.ahmatda.domain.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class ItemAdaptor {
@@ -19,4 +22,15 @@ public class ItemAdaptor {
         itemRepository.delete(item);
     }
 
+    public Optional<Item> findByItem(Long itemId) {
+        return itemRepository.findById(itemId);
+    }
+
+    public void modfiyItem(Item item){
+        itemRepository.save(item);
+    }
+
+    public void createAllItem(List<Item> items) {
+        itemRepository.saveAll(items);
+    }
 }

@@ -29,4 +29,12 @@ public class TemplateAdaptor {
     public void deleteUserTemplate(Template template) {
         templateRepository.delete(template);
     }
+
+    public Template modifyTemplateNameAndIsPin(Template modfiyTemplate) {
+        return templateRepository.save(modfiyTemplate);
+    }
+
+    public int templatesAllOffPin(Long categoryId) {
+        return templateRepository.templatesAllOffPin(categoryId);
+    }
 }
